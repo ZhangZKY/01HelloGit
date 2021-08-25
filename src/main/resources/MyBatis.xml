@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+    <!-- 导入属性配置文件 -->
+    <properties resource="mysqlProperties.properties"></properties>
+
+    <!-- 设置日志输出 -->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+
+    <!-- 自定义resultType别名 -->
+    <typeAliases>
+        <typeAlias type="com.zky.entity.Student" alias="stu"></typeAlias>
+        <package name="com.zky.entity"/>
+    </typeAliases>
+
+
+    <!-- pagehelper分页工具 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+
+        </environment>
+    </environments>
+
+
+    <!-- sql映射文件地址 -->
+    <mappers>
+        <mapper resource="com/zky/dao/StudentDao.xml"/>
+        <package name="com.zky.dao"/>
+    </mappers>
+
+</configuration>
